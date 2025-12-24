@@ -1,26 +1,66 @@
 @import "tailwindcss";
 
+@theme {
+  /* --- PALET WARNA ASBY (GSM) --- */
+  /* Formatnya: --color-nama: kode-hex */
+  
+  --color-asby-dark: #033E6B;
+  --color-asby-teal: #04759D;
+  --color-asby-gold: #D49B1F;
+  --color-asby-light: #E6BE50;
+
+  /* Settingan Font bawaan Next.js */
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+
+  --font-script: "Great Vibes", cursive; 
+}
+
+/* --- Settingan Dark Mode / Light Mode Standard --- */
 :root {
   --background: #ffffff;
   --foreground: #171717;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
 @media (prefers-color-scheme: dark) {
   :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+    /* Kita kunci background jadi putih aja biar desainnya konsisten */
+    /* Kalau mau dark mode beneran, ubah hex ini */
+    --background: #ffffff; 
+    --foreground: #171717;
   }
 }
 
+/* --- Base Styles --- */
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-sans), Arial, Helvetica, sans-serif;
 }
+
+html {
+  scroll-behavior: smooth;
+}
+
+/* ... kode css sebelumnya ... */
+
+/* --- Custom Animations --- */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fade-in-up {
+  animation: fadeInUp 0.8s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+}
+
+/* Biar kartu munculnya gantian (Staggered effect) */
+.delay-100 { animation-delay: 0.1s; }
+.delay-200 { animation-delay: 0.2s; }
+.delay-300 { animation-delay: 0.3s; }
