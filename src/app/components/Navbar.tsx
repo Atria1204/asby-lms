@@ -56,7 +56,7 @@ export default function Navbar() {
               isScrolled || !isDarkHeroPage ? "shadow-lg" : "shadow-none"
           }`}>
             <img 
-              src="/img/nirvana.png" 
+              src="/img/Nirvana_2026.png" 
               alt="Logo" 
               className="w-full h-full object-cover" 
             />
@@ -65,7 +65,7 @@ export default function Navbar() {
           <div className="flex flex-col">
             {/* Teks Utama */}
             <span className={`text-lg font-extrabold tracking-tight leading-none transition-colors ${textColorClass}`}>
-              Nirvana Ground
+              Nirvana
             </span>
             {/* Sub Teks */}
             <span className={`text-[12px] font-bold uppercase tracking-widest transition-colors ${subTextColorClass}`}>
