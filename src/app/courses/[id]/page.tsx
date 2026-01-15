@@ -71,6 +71,9 @@ export default function CourseLMS() {
   const [activeLesson, setActiveLesson] = useState<any>(null);
   const [isSidebarOpen, setIsSidebarOpen] = useState(true);
 
+  // --- LOGIC BARU: STATE UNTUK MENYIMPAN ID YANG SUDAH SELESAI ---
+  const [completedIds, setCompletedIds] = useState<number[]>([]);
+
   // --- LOGIC 1: AMBIL DATA DARI LOCAL STORAGE SAAT LOAD (Agar tidak reset saat refresh) ---
   useEffect(() => {
     if (!course) return;
@@ -80,6 +83,13 @@ export default function CourseLMS() {
     
     // Ambil semua lesson untuk pencarian
     const allLessons = course.sections.flatMap((section: any) => section.items);
+
+    const initialCompleted = allLessons
+        .filter((item: any) => item.isCompleted)
+        .map((item: any) => item.id);
+    // Gabungkan biar gak duplikat
+    setCompletedIds(prev => [...new Set([...prev, ...initialCompleted])]);
+
     
     if (savedLessonId) {
         // Jika ada history, cari lessonnya
@@ -127,6 +137,18 @@ export default function CourseLMS() {
   const nextLesson = currentIndex < allLessons.length - 1 ? allLessons[currentIndex + 1] : null;
 
   const handleNavigation = (direction: 'next' | 'prev') => {
+
+    // 🔥 TAMBAHAN BARU 3: Saat klik Next, tandai materi SEKARANG jadi selesai
+        if (activeLesson) {
+            setCompletedIds((prev) => {
+                if (!prev.includes(activeLesson.id)) {
+                    return [...prev, activeLesson.id];
+                }
+                return prev;
+            });
+        }
+
+
     if (direction === 'next' && nextLesson) handleLessonChange(nextLesson);
     if (direction === 'prev' && prevLesson) handleLessonChange(prevLesson);
   };
@@ -206,6 +228,7 @@ export default function CourseLMS() {
                     setActiveLesson={handleLessonChange} // Pake handler baru yg ada logic LocalStorage
                     isSidebarOpen={isSidebarOpen}
                     toggleSidebar={() => setIsSidebarOpen(!isSidebarOpen)}
+                    completedIds={completedIds}
                 />
             </div>
         </aside>
