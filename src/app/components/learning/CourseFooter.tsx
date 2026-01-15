@@ -35,7 +35,7 @@ export default function CourseFooter({
         >
           <div className="text-lg pb-0.5">←</div>
           <div className="text-left hidden md:block">
-            <p className="text-[10px] uppercase font-bold text-gray-400 leading-none mb-0.5">Sebelumnya</p>
+            <p className="text-[10px] uppercase font-bold text-gray-400 leading-none mb-0.5">Prev</p>
             {/* Truncate biar gak nabrak tengah */}
             <p className="text-xs font-bold truncate max-w-[100px] leading-none">{prevTitle}</p>
           </div>
@@ -62,7 +62,7 @@ export default function CourseFooter({
           }`}
         >
           <div className="text-right hidden md:block">
-            <p className="text-[10px] uppercase font-bold text-blue-200 leading-none mb-0.5">Selanjutnya</p>
+            <p className="text-[10px] uppercase font-bold text-blue-200 leading-none mb-0.5">Next</p>
             <p className="text-xs font-bold truncate max-w-[100px] leading-none">{nextTitle}</p>
           </div>
           <div className="text-lg pb-0.5">→</div>
