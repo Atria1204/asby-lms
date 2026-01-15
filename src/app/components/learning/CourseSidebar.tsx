@@ -8,6 +8,7 @@ interface CourseSidebarProps {
   setActiveLesson: (item: any) => void;
   isSidebarOpen: boolean;
   toggleSidebar: () => void;
+  completedIds: number[];
 }
 
 export default function CourseSidebar({ 
@@ -15,7 +16,8 @@ export default function CourseSidebar({
   activeLesson, 
   setActiveLesson,
   isSidebarOpen,
-  toggleSidebar
+  toggleSidebar,
+  completedIds
 }: CourseSidebarProps) {
   
   const [openSections, setOpenSections] = useState<number[]>([0]);
@@ -96,6 +98,8 @@ export default function CourseSidebar({
               >
                 {section.items.map((item: any, idx: number) => {
                   const isActive = activeLesson?.id === item.id;
+
+                  const isDone = completedIds.includes(item.id); 
                   
                   return (
                     <div 
@@ -109,7 +113,8 @@ export default function CourseSidebar({
                       {isActive && <div className="absolute left-0 top-0 bottom-0 w-1 bg-asby-gold"></div>}
 
                       <div className="mt-0.5 flex-shrink-0">
-                        {item.isCompleted ? (
+                        {/* 🔥 UBAH DI SINI: Gunakan 'isDone' untuk menampilkan centang hijau */}
+                        {isDone ? (
                           <div className="w-5 h-5 rounded-full bg-green-100 text-green-600 flex items-center justify-center text-[10px] font-bold">✓</div>
                         ) : isActive ? (
                           <div className="w-5 h-5 rounded-full bg-asby-dark text-white flex items-center justify-center text-[8px]">▶</div>
